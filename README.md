@@ -42,7 +42,7 @@ Y_pred=m*X+b
 print(Y_pred)
 plt.scatter(X,Y,color='blue')
 plt.plot(X,Y_pred,color='yellow') 
-plt.show() 
+plt.show() .
 
 
 ## Output:
