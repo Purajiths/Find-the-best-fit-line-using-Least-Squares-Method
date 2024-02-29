@@ -17,37 +17,39 @@ To implement univariate Linear Regression to fit a straight line using least squ
 6. Obtain the straight line equation Y=mX+b and plot the scatterplot.
 
 ## Program:
+/*
 Program to implement univariate Linear Regression to fit a straight line using least squares.
 Developed by: PURAJITH.S
-RegisterNumber:  212223040158
-
+RegisterNumber: 212223040158  
+*/
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-X=np.array(eval(input()))
-Y=np.array(eval(input()))
-X_mean=np.mean(X)
-print(X_mean)
-Y_mean=np.mean(Y)
-print(Y_mean)
-num=0
-denum=0
-for i in range(len(X)):
-  num+=(X[i]-X_mean)*(Y[i]-Y_mean)
-  denum+=(X[i]-X_mean)**2
-m=num/denum
-print(m)
-b=Y_mean - m*X_mean
-print(b)
-Y_pred=m*X+b
-print(Y_pred)
-plt.scatter(X,Y,color='blue')
-plt.plot(X,Y_pred,color='yellow') 
-plt.show() 
+df=pd.read_csv('/machine.csv')
+df.head(10)
+plt.scatter(df['X'],df['Y'])
+plt.xlabel('X')
+plt.ylabel('Y')
+x=df.iloc[:,0:1]
+y=df.iloc[:,-1]
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+from sklearn.linear_model import LinearRegression
+lr=LinearRegression()
+lr.fit(X_train,Y_train)
+X_train
+Y_train
+lr.predict(X_test.iloc[0].values.reshape(1,1))
+plt.scatter(df['X'],df['Y'])
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.plot(X_train,lr.predict(X_train),color='red')
 
 
 
 ## Output:
-![image](https://github.com/Purajiths/Find-the-best-fit-line-using-Least-Squares-Method/assets/145548193/e85c6408-8661-477a-aee6-3efb47ccd0e4)
+![image](https://github.com/Purajiths/Find-the-best-fit-line-using-Least-Squares-Method/assets/145548193/7ea14781-6232-4142-a3b3-b25f57a103c2)
+
 
 
 
